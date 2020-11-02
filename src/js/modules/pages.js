@@ -6,12 +6,10 @@ export const pageChange = function () {
         $(this).removeAttr('href')
     })
 
-    $('.pages__next').click(function() {        
-            $('.pages__item a')
-                .hasClass('pages__link--active')
-                .next('.pages__item a')
-                .addClass('pages__link--active');
-                console.log($(this));            
+    $('.pages__next').click(function() {
+        let b = $('.pages__num').next('.pages__num')
+        console.log(b)
+                                            
         
     })
-  }
+}

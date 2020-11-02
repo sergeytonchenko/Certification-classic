@@ -5,14 +5,14 @@ export const collectData = function(){
             params: {
                 brand: [],
                 manufacturer: $('#marka').val(),
-                model: $('#filter-model').val(),
+                model: '',
                 year: Number($('#filter-year').val()),
                 price: [Number($('#price-from').val()), Number($('#price-to').val())]
             },
             pagination: {
                 sort: $('#sort').val(),
                 perPage: Number($('#per_page').val()),
-                page: 2
+                page: Number($('.pages__link--active').attr('page'))
             }             
         };
 
@@ -20,24 +20,34 @@ export const collectData = function(){
             data.params.brand.push($(this).val());
         });
 
-        let dataUrl = Object.assign({}, data);
+        if ($('#marka').val() != '') {
+            data.params.model = $('#marka').val()
+        }
 
-        dataUrl.toString = function () {
-                return `?page=${this.params.year}
-                        &year=${this.params.year}
-                        &price=${this.params.price}
-                        &model=${$(this.params.model)}
-                        &manufacturer=${$(this.params.manufacturer)}
-                        &brand=${$(this.params.brand)}
-                        &sort
-                        &per-page`;
-            }
-                
+
+
+
+
+        //Вывод адресной строки
+        const { params, pagination } = data;
+        const merge = {...params, ...pagination};
+        merge.toString = function () {
+            return `?page=${this.page}
+                    &year=${this.year}
+                    &price=${this.price}
+                    &model=${this.model}
+                    &manufacturer=${this.manufacturer}
+                    &brand=${this.brand}
+                    &sort=${this.sort}
+                    &per-page=${this.perPage}`
+        }
+        history.pushState({}, '', merge.toString().replace(/\s+/g, ' ').trim()) 
         
-        console.log(dataUrl.toString().replace(/\s+/g, ' ').trim());
-        history.pushState({}, '', dataUrl.toString().replace(/\s+/g, ' ').trim())      
-        console.log(data);
+        // Альтернативный вариант   
+            // const queryParamsObj = new URLSearchParams(merge);        
+            // history.pushState({}, '', queryParamsObj.toString().replace(/\s+/g, ' ').trim())      
         
-        
+            // Вывод формы в консоль
+        console.log(data); 
     }); 
 };

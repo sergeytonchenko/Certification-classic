@@ -13,19 +13,6 @@ import {pageChange} from 'js#/modules/pages';
 // -----------------------------------------------------------------------------
 // Initialize
 // -----------------------------------------------------------------------------
-function setHeight(card) {
-	let a = 0;
-	card.each(
-		function() {
-			let currentHeight = $(this).height();
-			if (currentHeight > a) {
-				a = currentHeight;
-			}
-		}
-	);
-	card.height(a);
-}
-
 jQuery(function ($) {
 	setHeight($(".card"));
 	collectData();
