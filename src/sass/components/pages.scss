@@ -14,7 +14,7 @@
         padding-right: 0.65rem;
 
         &--active {
-            cursor: initial;
+            pointer-events: none;
             color: #ccc;
         }
     }

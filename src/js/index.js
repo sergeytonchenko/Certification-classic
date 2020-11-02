@@ -13,8 +13,7 @@ import {pageChange} from 'js#/modules/pages';
 // -----------------------------------------------------------------------------
 // Initialize
 // -----------------------------------------------------------------------------
-jQuery(function ($) {
-	setHeight($(".card"));
+jQuery(function ($) {	
 	collectData();
 	pageChange();	
 });
